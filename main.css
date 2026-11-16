@@ -200,6 +200,16 @@
   .kpi:hover { background: var(--c); }
   .kpi:hover .value, .kpi:hover .label { color: #fff; }
 
+  /* การ์ด KPI กดได้ → เปิดแท็บผลงานนั้น */
+  .kpi[data-target] { cursor: pointer; position: relative; }
+  .kpi[data-target]:focus-visible { outline: 3px solid var(--c); outline-offset: 3px; }
+  .kpi.active { background: var(--c-soft); border-color: var(--c); box-shadow: 0 0 0 1px var(--c); }
+  .kpi.active:hover { background: var(--c); }
+  .kpi.active::after {                 /* ลูกศรชี้ลงไปที่แท็บที่เปิดอยู่ */
+    content: ""; position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%);
+    border: 8px solid transparent; border-bottom: 0; border-top-color: var(--c);
+  }
+
   .tag {
     display: inline-block; font-size: 12px; padding: 2px 10px;
     border-radius: 999px; background: var(--c-soft, var(--accent-soft)); color: var(--c, var(--accent));
@@ -397,7 +407,23 @@
   .chart-card { position: relative; border-top-color: var(--line); border-top-width: 1px; }
   .chart-card:hover { transform: none; border-color: var(--line); }
   .chart-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-bottom: 18px; }
-  .chart-head h3 { margin: 0; margin-right: auto; }
+  .chart-head h3 { margin: 0; }
+
+  /* ปุ่มสลับมุมมอง ระบบงาน / ไซต์ */
+  .seg-toggle {
+    display: inline-flex; padding: 3px; margin-right: auto;
+    background: var(--bg-soft); border: 1px solid var(--line); border-radius: 999px;
+  }
+  .seg-toggle button {
+    font: inherit; font-size: 13px; color: var(--muted); cursor: pointer;
+    background: none; border: none; border-radius: 999px; padding: 3px 16px;
+    transition: background .2s, color .2s, box-shadow .2s;
+  }
+  .seg-toggle button:hover { color: var(--text); }
+  .seg-toggle button.active {
+    background: var(--bg); color: var(--accent); font-weight: bold;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, .15);
+  }
   .legend { display: flex; gap: 18px; font-size: 14px; color: var(--muted); }
   .view-toggle {
     font: inherit; font-size: 13px; color: var(--muted); cursor: pointer;
@@ -406,12 +432,16 @@
   }
   .view-toggle:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 
-  .hbar { display: grid; gap: 4px; }
+  .hbar { display: grid; gap: 2px; }
   .hb-row {
-    display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: 16px; align-items: center;
-    padding: 6px 8px; border-radius: 8px; transition: background .2s;
+    display: grid; grid-template-columns: minmax(140px, 260px) 1fr; gap: 16px; align-items: center;
+    padding: 3px 8px; border-radius: 8px; transition: background .2s;
   }
   .hb-row:hover { background: var(--bg-soft); }
+  /* แถว "อื่น ๆ" = ยอดรวมหลายรายการ : เส้นคั่น + สีจาง ไม่ให้ดูเป็นอันดับหนึ่ง */
+  .hb-row.is-other { border-top: 1px dashed var(--line); margin-top: 4px; padding-top: 7px; border-radius: 0 0 8px 8px; }
+  .hb-row.is-other .hb-name { color: var(--muted); }
+  .hb-row.is-other .seg { opacity: .45; }
   .hb-name { font-size: 15px; line-height: 1.4; }
   .hb-track { display: flex; align-items: center; gap: 12px; min-width: 0; }
   .hb-bar {
@@ -441,6 +471,7 @@
   .hb-tip div { display: flex; align-items: center; color: var(--muted); }
   .hb-tip div span { margin-left: auto; padding-left: 16px; color: var(--text); font-weight: bold; }
   .hb-tip .tt-total { border-top: 1px solid var(--line); margin-top: 4px; padding-top: 4px; }
+  .hb-tip .tt-members { max-width: 260px; margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.5; }
 
   .ov-table { width: 100%; border-collapse: collapse; font-size: 15px; }
   .ov-table th, .ov-table td { padding: 8px 12px; border-bottom: 1px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; }
