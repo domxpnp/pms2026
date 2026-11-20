@@ -57,15 +57,16 @@
   <section class="slide" id="overview" data-title="ภาพรวมผลงาน">
     <div class="eyebrow">01 · Overview</div>
     <h2>ภาพรวมผลงานปี 2026</h2>
-    <p class="lead">รับผิดชอบ Ticket ทั้งหมด 427 งาน ครอบคลุม 18 ระบบงาน ส่งตรงเวลา 85% (ม.ค. – พ.ย. 2026
+    <p class="lead">รับผิดชอบ Ticket ทั้งหมด 430 งาน ครอบคลุม 18 ระบบงาน ส่งตรงเวลา 94% (ม.ค. – พ.ย. 2026
       ไม่รวมงานวางระบบ)</p>
 
     <!--
     ข้อมูลกราฟ : แก้ตรงนี้ที่เดียว ตัวเลขสรุปและกราฟจะคำนวณให้อัตโนมัติ
-    ที่มา : Ticket_Task.xlsx (แจ้งระหว่าง 05/01/2026 – 11/11/2026)
-      - ตัดงานวางระบบออก : สถานะ "วางระบบ" / "รอวางระบบ" และหัวข้อที่เป็นงานวางระบบ (22 รายการ)
+    ที่มา : Ticket_Task (1).xlsx (แจ้งระหว่าง 05/01/2026 – 17/11/2026)
+      - ตัดงานวางระบบออก : สถานะ "วางระบบ" / "รอวางระบบ" และหัวข้อที่เป็นงานวางระบบ (21 รายการ)
       - ตัดงานที่ "ยกเลิก" ออก (3 รายการ)
-      - late = คอลัมน์ "เกินกำหนด" มากกว่า 0 วัน
+      - late = นับ (count) Ticket ที่คอลัมน์ "จำนวนวันที่เกินกำหนดของโปรแกรมเมอรร์" มากกว่า 0 วัน
+               แถวที่เป็นข้อความ "ไม่ได้กำหนดวันที่เสร็จ" (139) / "ไม่มีวันที่ทดสอบ" (39) ไม่นับเป็นเลยกำหนด
     มี 2 มุมมอง (สลับได้ที่ปุ่มบนกราฟ) :
       BY_SYSTEM = สรุปตามคอลัมน์ "ระบบงาน"
       BY_SITE   = สรุปตามคอลัมน์ "Site" (ย่อ "โรงพยาบาล" เป็น "รพ.")
@@ -76,43 +77,43 @@
   -->
     <script>
       const BY_SYSTEM = [
-        { name: 'Payroll System', total: 99, late: 26 },
-        { name: 'HR Module', total: 94, late: 14 },
-        { name: 'Time Attendance', total: 77, late: 11 },
-        { name: 'Asset Module', total: 27, late: 0 },
-        { name: 'TrainingSystem', total: 27, late: 1 },
-        { name: 'Employee Master', total: 23, late: 5 },
-        { name: 'Workplan', total: 18, late: 3 },
-        { name: 'AR Module', total: 13, late: 2 },
-        { name: 'DF Module', total: 13, late: 2 },
+        { name: 'Payroll System', total: 100, late: 9 },
+        { name: 'HR Module', total: 94, late: 7 },
+        { name: 'Time Attendance', total: 77, late: 2 },
+        { name: 'Asset Module', total: 27, late: 1 },
+        { name: 'TrainingSystem', total: 27, late: 0 },
+        { name: 'Employee Master', total: 24, late: 1 },
+        { name: 'Workplan', total: 18, late: 0 },
+        { name: 'AR Module', total: 13, late: 3 },
+        { name: 'DF Module', total: 13, late: 1 },
         { name: 'Stock Module', total: 10, late: 0 },
         { name: 'ผู้ดูแลระบบ', total: 8, late: 1 },
         { name: 'GL Module', total: 6, late: 1 },
-        { name: 'Appraisal System', total: 5, late: 0 },
-        { name: 'AP Module', total: 3, late: 0 },
+        { name: 'Appraisal System', total: 5, late: 1 },
+        { name: 'AP Module', total: 4, late: 0 },
         { name: 'Budget Module', total: 1, late: 0 },
         { name: 'การตั้งค่า', total: 1, late: 0 },
         { name: 'Mobile', total: 1, late: 0 },
         { name: 'EmployeeBenefitsv', total: 1, late: 0 },
       ];
       const BY_SITE = [
-        { name: 'เอกชล', total: 95, late: 15 },
-        { name: 'รพ.เกษมราษฎร์ อินเตอร์เนชั่นแนล อุบลราชธานี', total: 75, late: 5 },
-        { name: 'รพ.แพทย์รังสิต', total: 37, late: 8 },
-        { name: 'รพ.วิภาวดี', total: 34, late: 11 },
-        { name: 'รพ.ธนบุรี ทุ่งสง', total: 31, late: 2 },
-        { name: 'รพ.มหาวิทยาลัยเทคโนโลยีสุรนารี', total: 20, late: 3 },
-        { name: 'รพ.เอกชัย', total: 14, late: 3 },
-        { name: 'รพ.เฉพาะทางแม่และเด็ก', total: 14, late: 5 },
+        { name: 'เอกชล', total: 95, late: 9 },
+        { name: 'รพ.เกษมราษฎร์ อินเตอร์เนชั่นแนล อุบลราชธานี', total: 77, late: 3 },
+        { name: 'รพ.แพทย์รังสิต', total: 37, late: 1 },
+        { name: 'รพ.วิภาวดี', total: 34, late: 3 },
+        { name: 'รพ.ธนบุรี ทุ่งสง', total: 31, late: 0 },
+        { name: 'รพ.มหาวิทยาลัยเทคโนโลยีสุรนารี', total: 20, late: 1 },
+        { name: 'รพ.เอกชัย', total: 14, late: 1 },
+        { name: 'รพ.เฉพาะทางแม่และเด็ก', total: 14, late: 1 },
         { name: 'คลินิกเฉพาะทางด้านเวชกรรมรังสีรักษา เกษมราษฎร์อารี', total: 13, late: 0 },
-        { name: 'รพ.ราชพฤกษ์', total: 13, late: 0 },
-        { name: 'รพ.ธนบุรี ทวีวัฒนา', total: 12, late: 1 },
-        { name: 'เอกชัย คาร์ดิโอวาสคูลาร์ เซ็นเตอร์', total: 12, late: 1 },
-        { name: 'รพ.ธนบุรี ราษฎร์ยินดี', total: 10, late: 3 },
+        { name: 'รพ.ราชพฤกษ์', total: 13, late: 1 },
+        { name: 'รพ.ธนบุรี ทวีวัฒนา', total: 12, late: 2 },
+        { name: 'เอกชัย คาร์ดิโอวาสคูลาร์ เซ็นเตอร์', total: 12, late: 0 },
+        { name: 'รพ.ธนบุรี ราษฎร์ยินดี', total: 10, late: 0 },
+        { name: 'รพ.ซีจีเอช สายไหม', total: 8, late: 2 },
         { name: 'รพ.ราชธานี หนองแค', total: 8, late: 2 },
-        { name: 'RRTH - รังสีรักษาราชธานี', total: 7, late: 3 },
-        { name: 'รพ.ซีจีเอช สายไหม', total: 7, late: 1 },
-        { name: 'รพ.ธนบุรี ตรัง', total: 7, late: 1 },
+        { name: 'RRTH - รังสีรักษาราชธานี', total: 7, late: 1 },
+        { name: 'รพ.ธนบุรี ตรัง', total: 7, late: 0 },
         { name: 'รพ.ราชธานี โรจนะ', total: 3, late: 0 },
         { name: 'รพ.อินทรารัตน์', total: 3, late: 0 },
         { name: 'มหาวิทยาลัยมหาจุฬาลงกรณราชวิทยาลัย', total: 2, late: 0 },
@@ -120,9 +121,9 @@
         { name: 'แก่นพะงา', total: 2, late: 0 },
         { name: 'รพ.ธนบุรี ชุมพร V13.2', total: 1, late: 0 },
         { name: 'รพ.เฉพาะทางกระดูกและข้อ', total: 1, late: 0 },
-        { name: 'KDMS', total: 1, late: 1 },
+        { name: 'KDMS', total: 1, late: 0 },
         { name: 'ระบบ HR กลาง', total: 1, late: 0 },
-        { name: 'รพ.เฟอร์ทิว่า', total: 1, late: 1 },
+        { name: 'รพ.เฟอร์ทิว่า', total: 1, late: 0 },
         { name: 'รพ.ซีจีเอช พหลโยธิน', total: 1, late: 0 },
       ];
       // มุมมองของกราฟ : label = ชื่อที่แสดง, unit = หน่วยนับ
@@ -565,7 +566,7 @@
   <section class="slide" id="challenges" data-title="อุปสรรค">
     <div class="eyebrow">02 · Challenges</div>
     <h2>อุปสรรคและความท้าทายที่เจอ</h2>
-    <p class="lead">ทั้งเรื่องที่ผ่านมาได้สำเร็จ และเรื่องที่ยังไม่สำเร็จ พร้อมสิ่งที่ได้เรียนรู้</p>
+    <p class="lead">ที่ผ่านมาได้สำเร็จ  พร้อมสิ่งที่ได้เรียนรู้</p>
 
     <div class="grid grid-2">
       <!-- สำเร็จ -->
@@ -573,20 +574,23 @@
         <div class="col-title"><span class="dot"></span> ที่ผ่านมาได้สำเร็จ</div>
         <div class="stack">
           <div class="card">
-            <h3>[ความท้าทายที่ 1]</h3>
-            <p>[สถานการณ์ / ปัญหาที่เจอ และวิธีที่ใช้แก้ไข]</p>
-            <p class="learn"><b>ผลลัพธ์:</b> [ผลที่ได้]</p>
+            <h3>ปัญหา Server ค้างหรือล่มจากรายงาน</h3>
+            <p>ระบบแจ้งเตือนให้ดูเงินเดือน พนักงานจึงเข้ามาเปิดพร้อมกันหมด แต่ละครั้งต้องสร้างรายงานสด แถมรายงานยังใช้
+              SubReport ด้วย
+              รายงานดึงข้อมูลจาก AbpAuditLog ซึ่งใหญ่มาก จนรายงาน Time out และ Server ล่ม
+            </p>
+            <p class="learn"><b>ได้เรียนรู้ : </b> ต้องคิดว่าคาดการล่วงหน้าประเมินความเสี่ยงที่สามารถเกิดขึ้นได้ ไม่ใช่ทำแค่ให้รายงานออกถูก</p>
           </div>
           <div class="card">
-            <h3>[ความท้าทายที่ 2]</h3>
-            <p>[สถานการณ์ / ปัญหาที่เจอ และวิธีที่ใช้แก้ไข]</p>
-            <p class="learn"><b>ผลลัพธ์:</b> [ผลที่ได้]</p>
+            <h3>Table รองรับข้อมูลสำหรับออกรายงาน</h3>
+            <p>งานนี้ต้องออกแบบ Table, ทำ ER Diagram และทำ API CRUD เอง แล้วส่งต่อให้ทีม Front end</p>
+            <p class="learn"><b>ได้เรียนรู้ :</b> ได้งานออกแบบฐานข้อมูล และได้ส่งต่องานข้ามทีมให้อีกฝ่ายเอาไปทำต่อได้</p>
           </div>
         </div>
       </div>
 
       <!-- ยังไม่สำเร็จ -->
-      <div class="bad">
+      <!-- <div class="bad">
         <div class="col-title"><span class="dot"></span> ที่ยังไม่สำเร็จ</div>
         <div class="stack">
           <div class="card">
@@ -600,7 +604,7 @@
             <p class="learn"><b>สิ่งที่ได้เรียนรู้:</b> [บทเรียน / จะทำต่ออย่างไร]</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 
@@ -608,24 +612,24 @@
   <section class="slide" id="plan" data-title="แผนพัฒนา">
     <div class="eyebrow">03 Development Plan</div>
     <h2>แผนพัฒนาตนเองในปีหน้า</h2>
-    <p class="lead">[เป้าหมายหลักของปี 2027 ในประโยคเดียว]</p>
+    <!-- <p class="lead">[เป้าหมายหลักของปี 2027 ในประโยคเดียว]</p> -->
 
     <!-- ด้านที่จะพัฒนา -->
     <div class="grid grid-3">
       <div class="card c-blue">
         <span class="tag">Hard Skill</span>
-        <h3>[ทักษะเชิงเทคนิค]</h3>
+        <h3>ทักษะเชิงเทคนิค</h3>
         <ul>
-          <li>[สิ่งที่จะเรียน / คอร์ส / Certificate]</li>
-          <li>[ตัวชี้วัดความสำเร็จ]</li>
+          <li>พัฒนาตัวเองให้มีความรู้ความสามารถเพิ่มขึ้นไปอีกขั้นเพื่อที่สามารถจบงานได้ตัวคนเดียวไม่กระทบคนอื่น</li>
+          <!-- <li>[ตัวชี้วัดความสำเร็จ]</li> -->
         </ul>
       </div>
       <div class="card c-orange">
         <span class="tag">Soft Skill</span>
-        <h3>[ทักษะการทำงานร่วมกับผู้อื่น]</h3>
+        <h3>ทักษะการทำงานร่วมกับผู้อื่น</h3>
         <ul>
-          <li>[เช่น การสื่อสาร / ภาวะผู้นำ]</li>
-          <li>[ตัวชี้วัดความสำเร็จ]</li>
+          <li>การสื่อสาร ภาวะผู้นำการกล้าตัดสินใจ ทำให้ดีขึ้นไปอีก</li>
+          <!-- <li>[ตัวชี้วัดความสำเร็จ]</li> -->
         </ul>
       </div>
       <div class="card c-purple">
@@ -642,19 +646,19 @@
     <div class="timeline section-gap">
       <div class="tl-item">
         <div class="q">Q1</div>
-        <p>[แผนช่วงไตรมาสที่ 1]</p>
+        <p>ไตรมาสที่ 1</p>
       </div>
       <div class="tl-item">
         <div class="q">Q2</div>
-        <p>[แผนช่วงไตรมาสที่ 2]</p>
+        <p>ไตรมาสที่ 2</p>
       </div>
       <div class="tl-item">
         <div class="q">Q3</div>
-        <p>[แผนช่วงไตรมาสที่ 3]</p>
+        <p>ไตรมาสที่ 3</p>
       </div>
       <div class="tl-item">
         <div class="q">Q4</div>
-        <p>[แผนช่วงไตรมาสที่ 4]</p>
+        <p>ไตรมาสที่ 4</p>
       </div>
     </div>
   </section>
